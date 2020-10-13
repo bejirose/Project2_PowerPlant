@@ -1,0 +1,18 @@
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+    /*width: auto;*/
+    /*max-width: 1080px;*/
+    *padding: 0 5px;
+  }
+  
+  .footer {
+    /*background-color: #40a7de;
+    color: #ffffff;*/
+    border-top: 2px solid #286485;
+  }
+
+  
+  

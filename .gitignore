@@ -1,0 +1,9 @@
+# OS Environment
+.DS_Store
+
+# API keys
+config.py
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
