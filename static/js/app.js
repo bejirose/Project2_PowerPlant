@@ -19,7 +19,6 @@ function buildPage(year){
   
       //console.log(year);
       //console.log(data);
-      // Filter data.samples based on subject
 
       function filterByYear(testData) {
         return testData.Year == year;
