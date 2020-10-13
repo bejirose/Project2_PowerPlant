@@ -20,9 +20,7 @@ function buildPage(year){
       //console.log(year);
       //console.log(data);
       // Filter data.samples based on subject
-      // The array that you get back you are interested in [0]
-      // Use dot notation to get at .otu_ids, .otu_labels, .otu_sample_values
-      // Use slice for the horizontal bar chart
+
       function filterByYear(testData) {
         return testData.Year == year;
       }
@@ -31,43 +29,6 @@ function buildPage(year){
       var filteredSample = data.filter(filterByYear);
       console.log(filteredSample);
   
-    //   var otuSamplesList = filteredSample.map(sample => sample.sample_values);
-    //   var otuIdList = filteredSample.map(sample => sample.otu_ids);
-    //   var otuIdLabelsList = filteredSample.map(sample => sample.otu_ids);
-    //   var otuSamples = otuSamplesList[0].slice(0,10).reverse();
-    //   var otuIds = otuIdList[0].slice(0,10).reverse();
-    //   var otuTextIds = otuIds.map(id => `OTU ${id}`);
-    //   console.log(filteredSample);
-    //   console.log(otuSamples);   
-    //   console.log(otuIds); 
-    //   console.log(otuTextIds); 
-      // Plotly charts
-      // Horizonatal bar chart- orientation: "h"
-  
-      // Create the Trace
-    //   var trace1 = {
-    //     x: otuSamples,
-    //     y: otuTextIds,
-    //     type: "bar",
-    //     orientation: "h"
-    //   };
-  
-    //   // Create the data array for the plot
-    //   var data1 = [trace1];
-  
-    //   // Define the plot layout
-    //   var layout1 = {
-    //     title: `OTUs for Subject ${subject}`,
-    //     xaxis: { title: "Count" },
-    //     yaxis: { title: "OTU IDs" }
-    //   };
-  
-    //   // Plot the chart to a div tag with id "bar"
-    //   Plotly.newPlot("bar", data1, layout1);
-  
-      // Panel
-      // Filter data.metadata based on subject
-      // The array that you get back you are interested in [0]
       
       var panel = d3.select("#sample-metadata");
   
