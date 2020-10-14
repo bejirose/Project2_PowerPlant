@@ -47,10 +47,12 @@ function buildPage(year){
 
         var row = table.append("tr");
         var cell1 = row.append("td");
-        //cell1 = row.append("b");
         cell1.text(key);
         var cell2 = row.append("td");
         cell2.text(value);
+
+        d3.selectAll('table').selectAll('td').style("color", "#adafae");
+        d3.selectAll('table').selectAll('td:last-child').style("color", "white");
       })
       //console.log(keyArray);
       //console.log(valueArray);
@@ -70,7 +72,7 @@ function buildPage(year){
       // Define the plot layout
       var layout1 = {
         title: `Primary Energy by Type [${year}]`,
-        height: 400,
+        height: 450,
         width: 700,
         paper_bgcolor: "#2b3752",
         font: {color: '#9f9f9f'}
@@ -193,6 +195,7 @@ function buildPage(year){
         height: 600,
         width: 1100,
         paper_bgcolor: "#2b3752",
+        plot_bgcolor: "rgb(30, 30,30)",
         font: {color: '#9f9f9f'},
         title: {
           text:'Primary Energy by Type & Year',
@@ -222,11 +225,72 @@ function buildPage(year){
               //color: '#7f7f7f'
             }
           }
-        }
+        },
+        updatemenus: [{
+          y: 1,
+          yanchor: 'top',
+          buttons: [{
+              method: 'restyle',
+              args: ['visible', [true, true, true, true, true, true, true, true, true, true]],
+              label: 'All Categories'
+          }, {
+              method: 'restyle',
+              args: ['visible', [true, false, false, false, false, false, false, false, false, false]],
+              label: data1[0]['name']
+          }, {
+              method: 'restyle',
+              args: ['visible', [false, true, false, false, false, false, false, false, false, false]],
+              label: data1[1]['name']
+          }, {
+              method: 'restyle',
+              args: ['visible', [false, false, true, false, false, false, false, false, false, false]],
+              label: data1[2]['name']
+            }, {
+              method: 'restyle',
+              args: ['visible', [false, false, false, true, false, false, false, false, false, false]],
+              label: data1[3]['name']
+          }, {
+              method: 'restyle',
+              args: ['visible', [false, false, false, false, true, false, false, false, false, false]],
+              label: data1[4]['name']
+          }, {
+              method: 'restyle',
+              args: ['visible', [false, false, false, false, false, true, false, false, false, false]],
+              label: data1[5]['name']
+            }, {
+              method: 'restyle',
+              args: ['visible', [false, false, false, false, false, false, true, false, false, false]],
+              label: data1[6]['name']
+            }, {
+              method: 'restyle',
+              args: ['visible', [false, false, false, false, false, false, false, true, false, false]],
+              label: data1[7]['name']
+          }, {
+              method: 'restyle',
+              args: ['visible', [false, false, false, false, false, false, false, false, true, false]],
+              label: data1[8]['name']
+          }, {
+              method: 'restyle',
+              args: ['visible', [false, false, false, false, false, false, false, false, false, true]],
+              label: data1[9]['name']
+          }]
+        }]
       };
-  
+
+      function makeTrace(i) {
+        return {
+          //x: data1[0],  
+          y: data1[i]['y'],
+            // line: {
+            //   shape: 'spline' ,
+            //   color: 'red'
+            // },
+            //visible: i === 0,
+            name: data1[i]['name']
+        };
+    }
       // Plot the chart to a div tag with id "bar"
-      Plotly.newPlot("bar", data1, layout1);
+      Plotly.newPlot("bar", [0,1,2,3,4,5,6,7,8,9].map(makeTrace), layout1);
     })
   }
   

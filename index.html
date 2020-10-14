@@ -133,15 +133,15 @@
             </div>
             <div class="row" style="margin: auto">       
               <div class="col-md-4"> 
-                <div class="box skywhite">
+                <div class="box skywhite container-fluid flex-shrink-0">
                     <div class="row" style="margin: auto"> 
                         <div class="col-md-12">
-                            <h2 class="color_cyan">Analysis</h2>
-                            <hr>
-                            <h5 class="panel-title">Primary Energy Produced</h5>
-                            <div class="row box skywhite" style="margin: auto">
-                              <h5>Year: &nbsp; </h5>
-                              <select id="selDataset" onchange="optionChanged(this.value)"></select>
+                            <h2 class="color_cyan">Primary Energy Produced</h2>
+                            <!--<hr>
+                            <h5 class="panel-title" style="color: #adafae">Primary Energy Produced</h5></p>-->
+                            <div class="row box skywhite" style="margin: auto; ">
+                              <h5 style="color: #adafae">Year: &nbsp; </h5>
+                              <select id="selDataset" onchange="optionChanged(this.value)" style="color: #656766"></select>
                             </div>                            
                         </div>
                         <div class="panel panel-primary">
@@ -156,10 +156,12 @@
                     <!--<div class="box skywhite" id="bar"></div>-->
                 </div>
             </div>
+            <div class="container-fluid">
             <div class="row" style="margin: auto">  
               <div class="col-md-12">
                 <div class="box skywhite" id="bar"></div>
               </div>
+            </div>
             </div>
         </div>
         </div>
@@ -170,7 +172,7 @@
     </div>
     <footer class="footer mt-auto text-center py-3">
         <div class="container">          
-          <span class="text">&#169; Copyright Univ of Arizona Data Analytics Bootcamp 2020</span>
+          <span class="text" style="color: #adafae">&#169; Copyright Univ of Arizona Data Analytics Bootcamp 2020</span>
         </div>
     </footer>
   
