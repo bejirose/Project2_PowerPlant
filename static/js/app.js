@@ -23,12 +23,12 @@ function buildPage(year){
       function filterByYear(testData) {
         return testData.Year == year;
       }
-      //var samples = data.samples;
-      //console.log(samples);
+
       var filteredSample = data.filter(filterByYear);
-      console.log(filteredSample);
+      //console.log(filteredSample);
   
-      
+      // Build panel on right side - to see data by year
+
       var panel = d3.select("#sample-metadata");
   
       panel.html("");
@@ -76,143 +76,157 @@ function buildPage(year){
         font: {color: '#9f9f9f'}
       };
   
-      // Plot the chart to a div tag with id "bar"
+      // Plot the chart to a div tag with id "pie"
       Plotly.newPlot("pie", data1, layout1);
 
 
+      // Create Line Chart
+
+      var traces = [];
+      var len = 0;
+      //console.log (data.length);
+      var years = [];
+      var coal = [];
+      var oil = [];
+      var gas = [];
+      var hydropower = [];
+      var nuclear = [];
+      var solar = [];
+      var other = [];
+      var traditional_biomas = [];
+      var wind = [];
+      var biofuels = [];
 
 
+      data.forEach(buildTraceArrays); 
 
-      //Plot Bubble Chart
-  
-      var otuIds2 = otuIdList[0].reverse();
-      var otuSamples2 = otuSamplesList[0].reverse();
-      var otuIdLabelsList2 = filteredSample.map(sample => sample.otu_labels);
-  
-  
+      function buildTraceArrays(year, index) 
+      { 
+          //console.log(index, year); 
+          //len = Object.keys(year).length;
+          year['Year'] = +year['Year'];
+          years.push(year['Year']);
+          coal.push(year['Coal (TWh; direct energy)']);
+          oil.push(year['Oil (TWh; direct energy)']);
+          gas.push(year['Gas (TWh; direct energy)']);
+          hydropower.push(year['Hydropower (TWh; direct energy)']);
+          nuclear.push(year['Nuclear (TWh; direct energy)']);
+          solar.push(year['Solar (TWh; direct energy)']);
+          other.push(year['Other renewables (TWh; direct energy)']);
+          traditional_biomas.push(year['Traditional biomass (TWh; direct energy)']);
+          wind.push(year['Wind (TWh; direct energy)']);
+          biofuels.push(year['Biofuels (TWh; direct energy)']);
+          
+      }
+
+      //console.log(years);
+      //console.log(hydropower);
+
+      // Create the Traces
+      var trace1 = {
+        y: coal,
+        x: years,
+        type: "scatter",
+        name: 'coal'
+      };
       var trace2 = {
-        x: otuIds2,
-        y: otuSamples2,
-        mode: 'markers',
-        marker: {
-          color: otuIds2,
-          //opacity: [1, 0.8, 0.6, 0.4],
-          size: otuSamples2
-        }
+        y: oil,
+        x: years,
+        type: "scatter",
+        name: 'oil'
       };
-      
-      var data2 = [trace2];
-      
-      var layout2 = {
-        title: 'Sample Bubble Chart',
-        xaxis: { title: "OTU IDs" },
-        showlegend: false,
-        height: 600,
-        width: 1200
-      };
-      
-      Plotly.newPlot('bubble', data2, layout2);
-  
-      //Gage Chart
-      var washFreq = filteredPanel[0].wfreq;
-      console.log(washFreq);
-  
-      // var data3 = [
-      //   {
-      //     name: "Scrubs/Week",
-      //     type: "indicator",
-      //     mode: "gauge+number",
-      //     value: washFreq,
-      //     textposition: "inside",
-      //     title: { text: "Belly Button Washing Frequency", font: { size: 20 } },
-      //     gauge: {
-      //       axis: { range: [null, 9], tickwidth: 1, tickcolor: "darkblue" },
-      //       bar: { color: "gray" },
-      //       bgcolor: "white",
-      //       borderwidth: 0,
-            
-      //       bordercolor: "gray",
-      //       steps: [
-      //         { range: [0, 1], color: 'rgb(0, 255, 0)'},
-      //         { range: [1, 2], color: 'rgb(0, 225, 0)'},
-      //         { range: [2, 3], color: 'rgb(0, 200, 0)'},
-      //         { range: [3, 4], color: 'rgb(0, 175, 0)'},
-      //         { range: [4, 5], color: 'rgb(0, 150, 0)'},
-      //         { range: [5, 6], color: 'rgb(0, 125, 0)'},
-      //         { range: [6, 7], color: 'rgb(0, 100, 0)'},
-      //         { range: [7, 8], color: 'rgb(0, 50, 0)'},
-      //         { range: [8, 9], color: 'rgb(0, 0, 0)'}
-      //       ],
-      //       threshold: {
-      //         line: { color: "red", width: 4 },
-      //         thickness: 0.75,
-      //         value: 9
-      //       }
-      //     }
-      //   }
-      // ];
-  
-      // Second approach
       var trace3 = {
-        type: 'pie',
-        showlegend: false,
-        hole: 0.4,
-        rotation: 90,
-        values: [ 10, 10, 10, 10, 10, 10, 10, 10, 10, 90],
-        text: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9'],
-        direction: 'clockwise',
-        textinfo: 'text',
-        textposition: 'inside',
-        marker: {
-          colors: ['','','','','','','','','','white'],
-          labels: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9'],
-          hoverinfo: 'label'
-        }
-      }
-      var data3 = [trace3];
-      // needle
-      var degrees = 20 * washFreq 
-      var radius = 0.25
-      var radians = degrees * Math.PI / 180
-      var x = 0.5 - (radius * Math.cos(radians))
-      var y = 0.5 + (radius * Math.sin(radians))
+        y: gas,
+        x: years,
+        type: "scatter",
+        name: 'gas'
+      };
+      var trace4 = {
+        y: hydropower,
+        x: years,
+        type: "scatter",
+        name: 'hydropower'
+      };
+      var trace5 = {
+        y: nuclear,
+        x: years,
+        type: "scatter",
+        name: 'nuclear'
+      };
+      var trace6 = {
+        y: solar,
+        x: years,
+        type: "scatter",
+        name: 'solar'
+      };
+      var trace7 = {
+        y: other,
+        x: years,
+        type: "scatter",
+        name: 'other'
+      };
+      var trace8 = {
+        y: traditional_biomas,
+        x: years,
+        type: "scatter",
+        name: 'traditional_biomas'
+      };
+      var trace9 = {
+        y: wind,
+        x: years,
+        type: "scatter",
+        name: 'wind'
+      };
+      var trace10 = {
+        y: biofuels,
+        x: years,
+        type: "scatter",
+        name: 'biofuels'
+      };
   
-      var layout3 = {
-        width: 450,
-        height: 450,
-        shapes: [{
-          type: 'line',
-          x0: 0.5,
-          y0: 0.5,
-          x1: x,
-          y1: y,
-          line: {
-            color: 'black',
-            width: 3
-          }}],
-        annotations: [{
+      // Create the data array for the plot
+      var data1 = [trace1, trace2, trace3, trace4, trace5, trace6, trace7, trace8, trace9, trace10];
+  
+      // Define the plot layout
+      var layout1 = {
+        //title: `Primary Energy by Type & Year`,
+        height: 600,
+        width: 1100,
+        paper_bgcolor: "#2b3752",
+        font: {color: '#9f9f9f'},
+        title: {
+          text:'Primary Energy by Type & Year',
+          font: {
+            //family: 'Courier New, monospace',
+            size: 24
+          },
+          xref: 'paper',
+          //x: 0.05,
+        },
+        xaxis: {
+          title: {
+            text: 'Years',
             font: {
-              size: 20
-            },
-            showarrow: false,
-            text: washFreq,
-            x: 0.5,
-            y: 0.4
-          }],
-        title: { text: "Belly Button Washing Frequency", font: { size: 20 }},
-        xaxis: {visible: false, range: [-1, 1]},
-        yaxis: {visible: false, range: [-1, 1]}
-      }
-      
-      // var layout3 = {
-      //   width: 350,
-      //   height: 300,
-      //   margin: { t: 25, r: 25, l: 25, b: 25 },
-      //   paper_bgcolor: "white",
-      //   font: { color: "gray", family: "Arial" }
-      // };
-      
-      Plotly.newPlot('gauge', data3, layout3);
+              //family: 'Courier New, monospace',
+              size: 18,
+              //color: '#7f7f7f'
+            }
+          },
+        },
+        yaxis: {
+          title: {
+            text: 'Terawatt Hours (TWH/yr)',
+            font: {
+              //family: 'Courier New, monospace',
+              size: 18,
+              //color: '#7f7f7f'
+            }
+          }
+        }
+      };
+  
+      // Plot the chart to a div tag with id "bar"
+      Plotly.newPlot("bar", data1, layout1);
     })
   }
   
@@ -240,7 +254,7 @@ function buildPage(year){
           .property("selected",year['Year'])
       })
 
-      console.log(count);
+      //console.log(count);
       firstOne = data[count-1]['Year'];
   
       buildPage(firstOne);

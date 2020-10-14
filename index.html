@@ -102,57 +102,66 @@
       
       <!-- Begin page content -->
     <main role="main" class="flex-shrink-0">
-        <div><br><br><br><br></div>
         <div class="container-fluid">
-            <div class="row" style="margin: auto">       
-                <div class="col-md-8">
-                    <div class="box skywhite">
-                        <h2 class="color_cyan">Power Plants - Generators of Energy</h2>
-                        <hr>
-                        <img class="float-left img-fluid textWrap" src="Images/home_1.jpg" alt="energy-1">
-                        <p>The project team selected this topic as we deeply care about this planet, its resources and conservation.</p>
-                        <p>Goal: ......</p>
-                        <p>Architecture ......</p>
-                        <p>Data Sources & References</p>
-                        <p>Summary: ......</p>  
-                        <p>Lessons learned: ......</p> 
-                        <img class="float-right img-fluid textWrap" src="Images/Microsoft-COE.jpg" alt="energy-2"> 
-                        <p>Technology used: ......</p> 
-                        <h5 class="color_cyan">Project Team</h5>
-                        <p>This project is the result of all the hard work of following data analysts:</p>
-                        <ul>
-                          <li>Bejirose Stanly</li>
-                          <li>James Rucker</li>
-                          <li>Ashish Desai </li>
-                          <li>Poonam Kushwaha</li>
-                          <li>Mentor: Bill Parker</li>
-                          <li>Organization: University of Arizona Data Analytics Bootcamp 2020</li>
-                        </ul>                
-                    </div>
-                    <div class="box skywhite" id="pie"></div>
-
+            <div class="row" style="margin: auto"> 
+              <div class="col-md-12">
+                <div class="box skywhite">
+                  <div class="box skywhite">
+                    <h2 class="color_cyan">Power Plants - Generators of Energy</h2>
+                    <hr>
+                    <img class="float-left img-fluid textWrap" src="Images/home_1.jpg" alt="energy-1">
+                    <p>The project team selected this topic as we deeply care about this planet, its resources and conservation.</p>
+                    <p>Goal: ......</p>
+                    <p>Architecture ......</p>
+                    <p>Data Sources & References</p>
+                    <p>Summary: ......</p>  
+                    <p>Lessons learned: ......</p> 
+                    <img class="float-right img-fluid textWrap" src="Images/Microsoft-COE.jpg" alt="energy-2"> 
+                    <p>Technology used: ......</p> 
+                    <h5 class="color_cyan">Project Team</h5>
+                    <p>This project is the result of all the hard work of following data analysts:</p>
+                    <ul>
+                      <li>Bejirose Stanly</li>
+                      <li>James Rucker</li>
+                      <li>Ashish Desai </li>
+                      <li>Poonam Kushwaha</li>
+                      <li>Mentor: Bill Parker</li>
+                      <li>Organization: University of Arizona Data Analytics Bootcamp 2020</li>
+                    </ul>                
                 </div>
-                <div class="col-md-4"> 
-                    <div class="box skywhite">
-                        <div class="row" style="margin: auto"> 
-                            <div class="col-md-12">
-                                <h2 class="color_cyan">Analysis</h2>
-                                <hr>
-                                <h5 class="panel-title">Primary Energy Produced</h5>
-                                <div class="row box" style="margin: auto">
-                                  <h5>Year: &nbsp; </h5>
-                                  <select id="selDataset" onchange="optionChanged(this.value)"></select>
+              </div>  
+            </div>
+            <div class="row" style="margin: auto">       
+              <div class="col-md-4"> 
+                <div class="box skywhite">
+                    <div class="row" style="margin: auto"> 
+                        <div class="col-md-12">
+                            <h2 class="color_cyan">Analysis</h2>
+                            <hr>
+                            <h5 class="panel-title">Primary Energy Produced</h5>
+                            <div class="row box skywhite" style="margin: auto">
+                              <h5>Year: &nbsp; </h5>
+                              <select id="selDataset" onchange="optionChanged(this.value)"></select>
                             </div>                            
                         </div>
                         <div class="panel panel-primary">
                           <div id="sample-metadata" class="panel-body"></div>
                         </div>
-                      </div>
-                        
-                      </div>
-                    </div>
+                    </div>           
                 </div>
             </div>
+                <div class="col-md-8">
+                    <div class="box skywhite" id="pie"></div>
+                    <br>
+                    <!--<div class="box skywhite" id="bar"></div>-->
+                </div>
+            </div>
+            <div class="row" style="margin: auto">  
+              <div class="col-md-12">
+                <div class="box skywhite" id="bar"></div>
+              </div>
+            </div>
+        </div>
         </div>
 
     </main>
