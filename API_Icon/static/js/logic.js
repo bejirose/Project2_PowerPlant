@@ -1,25 +1,33 @@
 // Path for data is stored
 var queryUrl = "static/resources/world-power-plants-list.geojson";
 
+var coalData = [];
+
 
 // GET request is made
 d3.json(queryUrl, function(data) {
-  
+
   console.log(data);
-
-  // Variable is defined for ease later
-  var plantData = data.features;
-
  
   // Function for what to do for each feature
-  function onEachFeature(feature, layer) {
-    console.log(feature.properties.type);
+  function onEachFeature(feature) {
+    
+    // Datum is pushed into relevant layer
+    coalData.push({
+      "type" : "Point",
+      "coordinates" : [feature.geometry.coordinates[0], feature.geometry.coordinates[1]]});
   }
 
+  
+
   // Layer holding data is defined
-  var plants = L.geoJSON(plantData, {
+  L.geoJSON(data.features, {
     onEachFeature: onEachFeature
   });
+
+  coalLayer = L.geoJSON(coalData);
+
+  console.log(coalLayer);
 
   // Street map is generated
   var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -58,7 +66,7 @@ d3.json(queryUrl, function(data) {
 
   // Overlay object holding all overlay layer is generated
   var overlayMaps = {
-    Plants: plants
+    "Coal": coalLayer
   };
 
   // Generate myMap, which initializes on the satellite map
@@ -67,7 +75,7 @@ d3.json(queryUrl, function(data) {
       38, -97
     ],
     zoom: 4,
-    layers: [satmap, plants]
+    layers: [satmap, coalLayer]
   });
 
   // Layer control is generated and added to map
