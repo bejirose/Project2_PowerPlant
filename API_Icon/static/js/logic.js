@@ -1,18 +1,38 @@
-// Store our API endpoint inside queryUrl
+// Path for data is stored
 var queryUrl = "static/resources/world-power-plants-list.geojson";
 
 
+// GET request is made
+d3.json(queryUrl, function(data) {
+  
+  console.log(data);
 
-function createMap(data) {
+  // Variable is defined for ease later
+  var plantData = data.features;
+
  
-  // Function generates a marker on each 
-  function onEachFeature(feature) {
-    console.log(feature);
-    L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]]).addTo(myMap);
+  // Function for what to do for each feature
+  function onEachFeature(feature, layer) {
+    console.log(feature.properties.type);
   }
 
-  // Define streetmap and darkmap layers
-  var satMap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  // Layer holding data is defined
+  var plants = L.geoJSON(plantData, {
+    onEachFeature: onEachFeature
+  });
+
+  // Street map is generated
+  var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+    tileSize: 512,
+    maxZoom: 18,
+    zoomOffset: -1,
+    id: "mapbox/streets-v11",
+    accessToken: API_KEY
+  });
+
+  // Satellite map is generated
+  var satmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
     tileSize: 512,
     maxZoom: 18,
@@ -21,47 +41,37 @@ function createMap(data) {
     accessToken: API_KEY
   });
 
-  // var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-  //   attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-  //   maxZoom: 18,
-  //   id: "dark-v10",
-  //   accessToken: API_KEY
-  // });
+  // Dark map is generated
+  var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "dark-v10",
+    accessToken: API_KEY
+  });
 
-  // Define a baseMaps object to hold our base layers
-  // var baseMaps = {
-  //   "Street Map": streetmap,
-  //   "Dark Map": darkmap
-  // };
+  // BaseMaps object holding all base layers is generated
+  var baseMaps = {
+    "Satellite Map": satmap,
+    "Street Map": streetmap,
+    "Dark Map": darkmap
+  };
 
-  // Create overlay object to hold our overlay layer
-  // var overlayMaps = {
-  //   Plants: plantData
-  // };
+  // Overlay object holding all overlay layer is generated
+  var overlayMaps = {
+    Plants: plants
+  };
 
-  // Create myMap, centering on Potwin Kansas
+  // Generate myMap, which initializes on the satellite map
   var myMap = L.map("map", {
     center: [
       38, -97
     ],
-    zoom: 2
+    zoom: 4,
+    layers: [satmap, plants]
   });
 
-  // Run onEachFeature function on each datum
-  var plantData = L.geoJSON(data, {
-    onEachFeature: onEachFeature
-  });
-
-  // Add baseMaps
-  satMap.addTo(myMap);
-}
-
-
-// Perform GET request to the query URL (in this case, file saved locally)
-d3.json(queryUrl, function(data) {
-
-  console.log(data);
-
-  // Generate map
-  createMap(data);
+  // Layer control is generated and added to map
+  L.control.layers(baseMaps, overlayMaps, {
+    collapsed: false
+  }).addTo(myMap);
 });
