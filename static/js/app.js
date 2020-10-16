@@ -106,7 +106,9 @@ function buildPage(year){
       { 
           //console.log(index, year); 
           //len = Object.keys(year).length;
-          year['Year'] = +year['Year'];
+          //var endYear = new Date(year['Year'], 1, 1); 
+          //console.log(endYear.getFullYear());
+          //year['Year'] = +year['Year'];
           years.push(year['Year']);
           coal.push(year['Coal (TWh; direct energy)']);
           oil.push(year['Oil (TWh; direct energy)']);
@@ -122,7 +124,7 @@ function buildPage(year){
       }
 
       //console.log(years);
-      //console.log(hydropower);
+      //console.log(oil.length);
 
       // Create the Traces
       var trace1 = {
@@ -213,7 +215,8 @@ function buildPage(year){
               //family: 'Courier New, monospace',
               size: 18,
               //color: '#7f7f7f'
-            }
+            },
+            type: 'date'
           },
         },
         yaxis: {
@@ -279,7 +282,7 @@ function buildPage(year){
 
       function makeTrace(i) {
         return {
-          //x: data1[0],  
+          x: years,  
           y: data1[i]['y'],
             // line: {
             //   shape: 'spline' ,

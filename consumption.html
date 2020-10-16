@@ -54,7 +54,7 @@
                 <a class="nav-link" href="production.html" tabindex="-1" aria-disabled="true"><i class="fas fa-industry" style='font-size:20px'></i>Production</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="consumption.html" tabindex="-1" aria-disabled="true"><i class="fas fa-lightbulb" style='font-size:20px'></i>Consumption</a>
+                <a class="nav-link" href="consumption.html" tabindex="-1" aria-disabled="true"><i class="fas fa-lightbulb" style='font-size:20px'></i> Energy Consumption</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -113,16 +113,64 @@
               <div class="col-md-12">
                 <div class="box skywhite">
                   <div class="box skywhite">
-                    <h2 class="color_cyan">Energy Industry Fundamentals</h2>
+                    <h2 class="color_cyan">Global Energy Consumption</h2>
                     <hr>
-                    <iframe src="fundamentals_raw.html" style="height:10000px;width:100%;border:none;background: #FFFFFF;" title="Energy Fundamentals"></iframe>
+                    <div class="content">
+                      <div class="wrapper"><canvas id="myChart1"></canvas></div>
+                      
+                    </div>
                   </div>
-                </div>  
+              </div>
+              <div class="row" style="margin: auto"> 
+                <div class="col-md-12">
+                  <div class="box skywhite">  
+                    <div class="box skywhite">
+                      <h2 class="color_cyan">Global Energy Consumption By Region</h2>
+                      <hr>
+                      <div class="content">
+                        <div class="wrapper"><canvas id="myChart2"></canvas></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+            <div class="row" style="margin: auto">       
+              <div class="col-md-4"> 
+                <div class="box skywhite container-fluid flex-shrink-0">
+                    <div class="row" style="margin: auto"> 
+                        <div class="col-md-12">
+                            <h2 class="color_cyan">Primary Energy Consumed</h2>
+                            <!--<hr>
+                            <h5 class="panel-title" style="color: #adafae">Primary Energy Produced</h5></p>-->
+                            <div class="row box skywhite" style="margin: auto; ">
+                              <h5 style="color: #adafae">Year: &nbsp; </h5>
+                              <select id="selDataset" onchange="optionChanged(this.value)" style="color: #656766"></select>
+                            </div>                            
+                        </div>
+                        <div class="panel panel-primary">
+                          <div id="sample-metadata" class="panel-body"></div>
+                        </div>
+                    </div>           
+                </div>
+            </div>
+                <div class="col-md-8">
+                    <div class="box skywhite" id="pie"></div>
+                    <br>
+                    <!--<div class="box skywhite" id="bar"></div>-->
+                </div>
+            </div>
+            <!-- <div class="container-fluid">
+            <div class="row" style="margin: auto">  
+              <div class="col-md-12">
+                <div class="box skywhite" id="bar"></div>
+              </div>
+            </div>
+            </div> -->
         </div>
-    </main>
+        </div>
 
+    </main>
     <div class='row'>
         <div class='col-lg-12 col-lg-offset-2'><hr></div>
     </div>
@@ -136,8 +184,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-  <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script src="./static/js/app.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="./static/js/utils.js"></script>
+  <script src="./static/js/app.js"></script>
+  <script src="./static/js/chartapp.js"></script>
 </body>
 
 </html>

@@ -6,6 +6,7 @@ var country = [];
 var region = [];
 var yearCountry = [];
 var coal = [];
+var gas = [];
 var oil = [];
 var biomass = [];
 var hydro = [];
@@ -21,11 +22,12 @@ d3.csv("./data/primary-energy-consumption-by-source.csv").then((data) => {
 
 
         if (entityYear["Entity"] == "World") {
-            //console.log(entityYear);
+            console.log(entityYear);
             year.push(parseInt(entityYear["Year"]));
             country.push(entityYear["Entity"]);
             yearCountry.push(entityYear["Entity"] + entityYear["Year"]);
             coal.push(277.78 * parseFloat(entityYear["Coal Consumption - EJ"]));
+            gas.push(277.78 * parseFloat(entityYear["Gas Consumption - EJ"]));
             oil.push(277.78 * parseFloat(entityYear["Oil Consumption - EJ"]));
             biomass.push(parseFloat(entityYear["Geo Biomass Other - TWh"]));
             hydro.push(parseFloat(entityYear["Hydro Generation - TWh"])); 
@@ -59,6 +61,18 @@ var chart = new Chart(ctx, {
             //borderDash: [5, 5],
             //cubicInterpolationMode: 'monotone'
         },{
+            label: 'Gas (EJ)',
+            backgroundColor: 'rgb(100, 200, 200)',
+            borderColor: 'rgb(100, 200, 200)',
+            data: gas,
+            fill: false,
+            lineTension: 0,
+            pointStyle: 'cross',
+            pointBorderColor: 'rgb(100, 200, 200)',
+            pointHoverColor: 'rgb(100, 200, 200)',
+            pointRadius: 5,
+            pointHoverRadius: 10,
+        },{
             label: 'Oil (EJ)',
             backgroundColor: 'rgb(100, 200, 132)',
             borderColor: 'rgb(100, 200, 132)',
@@ -66,8 +80,8 @@ var chart = new Chart(ctx, {
             fill: false,
             lineTension: 0,
             pointStyle: 'cross',
-            pointBorderColor: 'rgb(0, 0, 0)',
-            pointHoverColor: 'rgb(0, 0, 0)',
+            pointBorderColor: 'rgb(100, 200, 132)',
+            pointHoverColor: 'rgb(100, 200, 132)',
             pointRadius: 5,
             pointHoverRadius: 10,
         },{
