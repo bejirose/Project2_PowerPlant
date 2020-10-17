@@ -10,16 +10,38 @@ d3.json(queryUrl, function(data) {
   console.log(data);
  
   // Function for what to do for each feature
-  function onEachFeature(feature) {
+  function onEachFeature(feature, layer) {
     
+    console.log(feature);
+
+    // Info for datum is crafted
+    var datum = {"type": "Feature",
+    "properties": {
+        "name": feature.properties.plant_name,
+        "MWE": feature.properties.plant_design_capacity_mwe,
+        "type": feature.properties.type,
+        "popupContent": "This is where the Rockies play!"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [ feature.geometry.coordinates[0], feature.geometry.coordinates[1]]
+    }}
+
     // Datum is pushed into relevant layer
-    coalData.push({
-      "type" : "Point",
-      "coordinates" : [feature.geometry.coordinates[0], feature.geometry.coordinates[1]]});
+    switch(feature.properties.type){
+    case "COAL": 
+      coalData.push(datum);
+      break;
+    default:
+      console.log(feature.properties.type);
+    };
+
+    // Popup is added for datum point
+    // layer.bindPopup("<h3>" + "I think the title" +
+    //   "</h3><hr><p>" + "The data?" + "</p>");
   }
-
   
-
+ 
   // Layer holding data is defined
   L.geoJSON(data.features, {
     onEachFeature: onEachFeature
@@ -27,7 +49,7 @@ d3.json(queryUrl, function(data) {
 
   coalLayer = L.geoJSON(coalData);
 
-  console.log(coalLayer);
+  console.log(coalData);
 
   // Street map is generated
   var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -69,12 +91,12 @@ d3.json(queryUrl, function(data) {
     "Coal": coalLayer
   };
 
-  // Generate myMap, which initializes on the satellite map
+  // Generate myMap, which initializes on the satellite map and is centered on Potkin, Kansas
   var myMap = L.map("map", {
     center: [
       38, -97
     ],
-    zoom: 4,
+    zoom: 2,
     layers: [satmap, coalLayer]
   });
 
