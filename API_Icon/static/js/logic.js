@@ -1,18 +1,22 @@
 // Path for data is stored
 var queryUrl = "static/resources/world-power-plants-list.geojson";
 
+// Empty arrays to hold layers are initialized
 var coalData = [];
-
+var oilData = [];
+var wasteData = [];
+var windData = [];
+var hydroData = [];
+var gasData = [];
+var nuclearData = [];
+var geothermalData = [];
+var solarData = [];
 
 // GET request is made
 d3.json(queryUrl, function(data) {
-
-  console.log(data);
  
   // Function for what to do for each feature
   function onEachFeature(feature, layer) {
-    
-    console.log(feature);
 
     // Info for datum is crafted
     var datum = {"type": "Feature",
@@ -20,7 +24,6 @@ d3.json(queryUrl, function(data) {
         "name": feature.properties.plant_name,
         "MWE": feature.properties.plant_design_capacity_mwe,
         "type": feature.properties.type,
-        "popupContent": "This is where the Rockies play!"
     },
     "geometry": {
         "type": "Point",
@@ -32,8 +35,36 @@ d3.json(queryUrl, function(data) {
     case "COAL": 
       coalData.push(datum);
       break;
+    case "OIL": 
+      oilData.push(datum);
+      break;
+    case "WASTE": 
+      wasteData.push(datum);
+      break;
+    case "WIND": 
+      windData.push(datum);
+      break;
+    case "HYDRO": 
+      hydroData.push(datum);
+      break;
+    case "GAS": 
+      gasData.push(datum);
+      break;
+    case "NUCLEAR": 
+      nuclearData.push(datum);
+      break;
+    case "GEOTHERMAL": 
+      geothermalData.push(datum);
+      break;
+    case "SOLAR_PV": 
+      solarData.push(datum);
+      break;
+    case "SOLAR_THERMAL": 
+      solarData.push(datum);
+      break;
     default:
       console.log(feature.properties.type);
+      break;
     };
 
     // Popup is added for datum point
@@ -47,9 +78,17 @@ d3.json(queryUrl, function(data) {
     onEachFeature: onEachFeature
   });
 
+  // All geoJSON data is turned into corresponding layers
   coalLayer = L.geoJSON(coalData);
+  oilLayer = L.geoJSON(oilData);
+  windLayer = L.geoJSON(windData);
+  wasteLayer = L.geoJSON(wasteData);
+  hydroLayer = L.geoJSON(hydroData);
+  gasLayer = L.geoJSON(gasData);
+  nuclearLayer = L.geoJSON(nuclearData);
+  geothermalLayer = L.geoJSON(geothermalData);
+  solarLayer = L.geoJSON(solarData);
 
-  console.log(coalData);
 
   // Street map is generated
   var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -86,9 +125,17 @@ d3.json(queryUrl, function(data) {
     "Dark Map": darkmap
   };
 
-  // Overlay object holding all overlay layer is generated
+  // Overlay object holding all overlay layers is generated
   var overlayMaps = {
-    "Coal": coalLayer
+    "Coal": coalLayer,
+    "Oil": oilLayer,
+    "Gas": gasLayer,
+    "Waste": wasteLayer,
+    "Nuclear": nuclearLayer,
+    "Solar": solarLayer,
+    "Wind": windLayer,
+    "Hydro": hydroLayer,
+    "Geothermal": geothermalLayer,
   };
 
   // Generate myMap, which initializes on the satellite map and is centered on Potkin, Kansas
@@ -96,12 +143,10 @@ d3.json(queryUrl, function(data) {
     center: [
       38, -97
     ],
-    zoom: 2,
+    zoom: 3,
     layers: [satmap, coalLayer]
   });
 
   // Layer control is generated and added to map
-  L.control.layers(baseMaps, overlayMaps, {
-    collapsed: false
-  }).addTo(myMap);
+  L.control.layers(baseMaps, overlayMaps).addTo(myMap);
 });
