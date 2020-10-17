@@ -16,7 +16,7 @@ var solarData = [];
 d3.json(queryUrl, function(data) {
  
   // Function for what to do for each feature
-  function onEachFeature(feature, layer) {
+  function onEachFeature(feature) {
 
     // Info for datum is crafted
     var datum = {"type": "Feature",
@@ -66,11 +66,7 @@ d3.json(queryUrl, function(data) {
       console.log(feature.properties.type);
       break;
     };
-
-    // Popup is added for datum point
-    // layer.bindPopup("<h3>" + "I think the title" +
-    //   "</h3><hr><p>" + "The data?" + "</p>");
-  }
+  };
   
  
   // Layer holding data is defined
@@ -144,9 +140,36 @@ d3.json(queryUrl, function(data) {
       38, -97
     ],
     zoom: 3,
-    layers: [satmap, coalLayer]
+    layers: [satmap, coalLayer, oilLayer, gasLayer, wasteLayer, nuclearLayer, solarLayer, windLayer,
+       hydroLayer, geothermalLayer]
+  });
+  finishMap(myMap, baseMaps, overlayMaps)
+});
+
+// Function for the end step of generating map
+function finishMap(myMap, baseMaps, overlayMaps) {
+  
+  // Function to run through each feature
+  function onEachFeature(layer){
+
+    // One of the passed layers is the layer holding every feature, so if else filters out all undefined
+    if (layer.feature === undefined) {}
+
+    // else creates the popup for every element
+    else {
+    console.log(layer);
+    layer.bindPopup(`<p><strong>Name:</strong></br>${layer.feature.properties.name}</p>
+      <p><strong>Type:</strong></br>${layer.feature.properties.type}</p>
+      <p><strong>MWE:</strong></br>${layer.feature.properties.MWE}</p>
+      <p><strong>Latitude, Longitude:</strong></br>${layer._latlng.lat}, ${layer._latlng.lng}</p>`);
+    }
+  };
+  
+  // Loop through every layer
+  myMap.eachLayer((layer) => {
+    onEachFeature(layer);
   });
 
   // Layer control is generated and added to map
   L.control.layers(baseMaps, overlayMaps).addTo(myMap);
-});
+};
