@@ -6,12 +6,19 @@
   <meta charset="UTF-8">
   <title>Energy</title>
 
-  <!-- Bring in our bootstrap stylesheet -->
+  <!-- Bring in our bootstrap stylesheet 
   <link rel="stylesheet" href="./static/css/bootstrap.min.css">
   <link rel="stylesheet" href="./static/css/styles.css">
   <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  --> 
 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  
+  
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -28,8 +35,11 @@
       }
     }
   </style>
-  <!-- Custom styles for this template -->
-  <link rel="stylesheet" href="./static/css/sticky-footer-navbar.css">
+
+  <!-- CHANGED Custom styles for this template
+  <link rel="stylesheet" href="./static/css/sticky-footer-navbar.css"> -->
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sticky-footer-navbar.css') }}" />
 
 </head>
 
@@ -61,10 +71,12 @@
                   <i class="far fa-chart-bar" style='font-size:20px'></i> Analysis
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="charts/top10us.html">Top10 Plants(US)</a>
-                  <a class="dropdown-item" href="charts/topusbyType.html">Top Plants (US-type)</a>
-                  <a class="dropdown-item" href="charts/topworld.html">Top Plants (World)</a>
-                  <a class="dropdown-item" href="plot4.html">Plot 4</a>
+                  <!-- <a class="dropdown-item" href="top10us.html">Top 10</a> 
+                  <a class="dropdown-item" href="top10_api">Top 10</a> -->
+                  <a class="dropdown-item" href="top10us_data">Top 10 US Plants</a>
+                  <a class="dropdown-item" href="topusplanttype_data">Top US Plant Types</a>
+                  <a class="dropdown-item" href="topworld_data">Top World Plants</a>
+                  <a class="dropdown-item" href="country_data">Plot 4</a>
                   <a class="dropdown-item" href="plot5.html">Plot 5</a>
                   <a class="dropdown-item" href="plot6.html">Plot 6</a>
                   <a class="dropdown-item" href="plot7.html">Plot 7</a>
@@ -110,11 +122,31 @@
     <main role="main" class="flex-shrink-0">
         <div class="container-fluid">
             <div class="row" style="margin: auto"> 
+
+
+              <div class="row">
+                <div class="col-md-2">
+                  <div class="well">
+                    <h6>Search Country</h6>
+                    <select id="search" onchange="optionChanged(this.value)"></select>
+                  </div>
+                 
+                <div class="col-md-10">
+                  <div id="bar"></div>
+                </div>
+               
+              </div>
+
+              <!--
               <div class="col-md-12">
                 <div class="box skywhite">
                   <div class="box skywhite">
-                    <h2 class="color_cyan">Energy Industry & Power Plants (Engines of Energy)</h2>
+                    <h2 class="color_cyan">Search Country Data</h2>
                     <hr>
+                    <div id="bar"></div>
+
+
+
                     <img class="float-left img-fluid textWrap" style="padding-right: 20px" src="Images/home_1.jpg" alt="energy-1">
                     <h5 class="color_cyan">Introduction</h5>
                     <p>The project team selected this topic as we deeply care about this planet, its resources and conservation. 
@@ -146,12 +178,13 @@
                     <h5 class="color_cyan">Summary</h5>
                     <p>Summary: ......</p>  
                     <h5 class="color_cyan">Lessons Learned</h5>
-                    <p>Lessons learned: ......</p> 
+                    <p>Lessons learned: ......</p>  -->
 
-                </div>
+             <!--   </div>
               </div>  
             </div>
-            <div class="container-fluid">
+
+             <div class="container-fluid">
               <div class="row" style="margin: auto">       
                 <div class="col-md-4"> 
                   <div class="box skywhite container-fluid flex-shrink-0">
@@ -188,9 +221,9 @@
               </div>
               </div>
             </div>
-            </div>
+            </div> -->
         </div>
-        </div>
+        </div> 
 
     </main>
     <div class='row'>
@@ -206,8 +239,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-  <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script src="./static/js/app.js"></script> -->
+   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!--<script src="./static/js/app.js"></script> -->
+  <script src="./static/js/countrySelect.js"></script>
 </body>
 
 </html>
