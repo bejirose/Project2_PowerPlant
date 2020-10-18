@@ -50,8 +50,8 @@
             <div class="topnav">
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
             </div>
-              <a class="navbar-brand" href="index.html"><h5 class="color_cyan"><span class='fas fa-home' style='font-size:20px'></span> Energy Matters</h5></a>
-              <a class="navbar-brand" href="index.html"></a>
+              <a class="navbar-brand" href="/"><h5 class="color_cyan"><span class='fas fa-home' style='font-size:20px'></span> Energy Matters</h5></a>
+              <a class="navbar-brand" href="/"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -60,26 +60,27 @@
               <li class="nav-item active">
                 <a class="nav-link" href="about.html"><i class="far fa-address-card" style='font-size:20px'></i> Team<span class="sr-only">(current)</span></a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="production.html" tabindex="-1" aria-disabled="true"><i class="fas fa-industry" style='font-size:20px'></i>Production</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="far fa-industry" style='font-size:20px'></i> Production
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item fas fa-industry" href="production">By Type</a>
+                  <a class="dropdown-item fas fa-industry" href="production2">By Country</a>
+                </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="consumption.html" tabindex="-1" aria-disabled="true"><i class="fas fa-lightbulb" style='font-size:20px'></i>Consumption</a>
+                <a class="nav-link" href="consumption" tabindex="-1" aria-disabled="true"><i class="fas fa-lightbulb" style='font-size:20px'></i>Consumption</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="far fa-chart-bar" style='font-size:20px'></i> Analysis
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <!-- <a class="dropdown-item" href="top10us.html">Top 10</a> 
-                  <a class="dropdown-item" href="top10_api">Top 10</a> -->
                   <a class="dropdown-item" href="top10us_data">Top 10 US Plants</a>
                   <a class="dropdown-item" href="topusplanttype_data">Top US Plant Types</a>
                   <a class="dropdown-item" href="topworld_data">Top World Plants</a>
                   <a class="dropdown-item" href="country_data">Search Country</a>
-                  <a class="dropdown-item" href="plot5.html">Plot 5</a>
-                  <a class="dropdown-item" href="plot6.html">Plot 6</a>
-                  <a class="dropdown-item" href="plot7.html">Plot 7</a>
                 </div>
               </li>
               <li class="nav-item">
@@ -110,7 +111,7 @@
                 <a class="nav-link" href="datasources.html" tabindex="-1" aria-disabled="true"><i class="fas fa-table" style='font-size:20px'></i> Data Sources</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="fundamentals.html" tabindex="-1" aria-disabled="true"><i class="fas fa-book-open" style='font-size:20px'></i> Fundamentals</a>
+                <a class="nav-link" href="fundamentals" tabindex="-1" aria-disabled="true"><i class="fas fa-book-open" style='font-size:20px'></i> Fundamentals</a>
               </li>
             </ul>
 
@@ -127,7 +128,7 @@
                   <div class="box skywhite">
                     <h2 class="color_cyan">Energy Industry & Power Plants (Engines of Energy)</h2>
                     <hr>
-                    <img class="float-left img-fluid textWrap" style="padding-right: 20px" src="Images/home_1.jpg" alt="energy-1">
+                    <img class="float-left img-fluid textWrap" style="padding-right: 20px" src="{{ url_for('static', filename='Images/home_1.jpg') }}" alt="energy-1">
                     <h5 class="color_cyan">Introduction</h5>
                     <p>The project team selected this topic as we deeply care about this planet, its resources and conservation. 
                       Energy which must be harvested in various forms to support our society's increased needs for power and electricity.
@@ -150,7 +151,8 @@
                         <li>Geothermal</li>
                         <li>Biogas</li>
                       </ul> 
-                    <img class="float-right img-fluid textWrap" style="padding-left: 20px" src="Images/Microsoft-COE.jpg" alt="energy-2"> 
+                    <img class="float-right img-fluid textWrap" style="padding-left: 20px" src="{{ url_for('static', filename='Images/Microsoft-COE.jpg') }}" alt="energy-2"> 
+                    
                     <h5 class="color_cyan">Goal</h5>
                     <p>Goal: ......</p>
                     <h5 class="color_cyan">Architecture/Technology Used</h5>
@@ -169,7 +171,7 @@
                   <div class="box skywhite container-fluid flex-shrink-0">
                       <div class="row" style="margin: auto"> 
                           <div class="col-md-12">
-                              <h4 class="color_cyan">Primary Energy Produced</h4>
+                              <h4 class="color_cyan">Technology</h4>
                               <hr>                          
                           </div>
                       </div>           
@@ -179,7 +181,7 @@
                     <div class="box skywhite container-fluid flex-shrink-0">
                       <div class="row" style="margin: auto"> 
                           <div class="col-md-12">
-                              <h4 class="color_cyan">Primary Energy Produced</h4>
+                              <h4 class="color_cyan">Technology Stack powering this Project</h4>
                               <hr>                          
                           </div>
                       </div>           
@@ -193,7 +195,7 @@
                 <div class="box skywhite container-fluid flex-shrink-0">
                   <div class="row" style="margin: auto"> 
                       <div class="col-md-12">
-                          <h4 class="color_cyan">Primary Energy Produced</h4>
+                          <h4 class="color_cyan"></h4>
                           <hr>                          
                       </div>
                   </div>           

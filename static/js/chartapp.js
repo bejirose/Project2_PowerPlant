@@ -14,7 +14,7 @@ var nuclear = [];
 var solar = [];
 var wind = [];
 
-d3.csv("./data/primary-energy-consumption-by-source.csv").then((data) => {
+d3.csv("./csvdata3").then((data) => {
   
     //console.log(data);
 
@@ -22,7 +22,7 @@ d3.csv("./data/primary-energy-consumption-by-source.csv").then((data) => {
 
 
         if (entityYear["Entity"] == "World") {
-            console.log(entityYear);
+            //console.log(entityYear);
             year.push(parseInt(entityYear["Year"]));
             country.push(entityYear["Entity"]);
             yearCountry.push(entityYear["Entity"] + entityYear["Year"]);
@@ -217,7 +217,7 @@ var middleEast = [];
 var southCentralAmerica = [];
 var africa = [];
 
-d3.csv("./data/primary-energy-consumption-by-region.csv").then((data) => {
+d3.csv("/csvdata2").then((data) => {
   
     //console.log(data);
 
@@ -393,7 +393,7 @@ var chart2 = new Chart(ctx2, {
 
 function buildPage(year){
 
-    d3.csv("./data/primary-energy-consumption-by-region.csv").then((data) => {
+    d3.csv("/csvdata2").then((data) => {
   
       //console.log(year);
       //console.log(data);
@@ -475,7 +475,7 @@ function buildPage(year){
     // Fill dropdown with IDs
     // Get firstOne id and call buildPage with that id
   
-    d3.csv("./data/primary-energy-consumption-by-region.csv").then((data) => {
+    d3.csv("/csvdata2").then((data) => {
   
       var selector = d3.select("#selDataset");
   
