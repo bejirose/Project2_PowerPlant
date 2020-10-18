@@ -14,8 +14,7 @@
 
 
 function buildPage(year){
-
-    d3.csv("./data/global-primary-energy.csv").then((data) => {
+  d3.csv('/csvdata1').then((data) => {
   
       //console.log(year);
       //console.log(data);
@@ -303,7 +302,8 @@ function buildPage(year){
     // Fill dropdown with IDs
     // Get firstOne id and call buildPage with that id
   
-    d3.csv("./data/global-primary-energy.csv").then((data) => {
+    d3.csv('/csvdata1').then((data) => {
+  
   
       var selector = d3.select("#selDataset");
   
