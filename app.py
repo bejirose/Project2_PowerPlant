@@ -20,10 +20,28 @@ connection = psycopg2.connect(user = username,
                                   database = "World_power_plant")
 cursor = connection.cursor()
 
-sql = 'select "PLANT_NAME", "PLANT_DESIGN_CAPACITY_MWE" from WORLD_PLANT_LIST where "PLANT_COUNTRY" = %s ORDER BY "PLANT_DESIGN_CAPACITY_MWE" DESC NULLS LAST LIMIT 10'
+top10ussql = 'select "PLANT_NAME", "PLANT_DESIGN_CAPACITY_MWE" from WORLD_PLANT_LIST where "PLANT_COUNTRY" = %s ORDER BY "PLANT_DESIGN_CAPACITY_MWE" DESC NULLS LAST LIMIT 10'
+cursor.execute(top10ussql, ("United States of America",))
+top10USrecords = cursor.fetchall()
 
-cursor.execute(sql, ("United States of America",))
-records = cursor.fetchall()
+topustypesql = 'SELECT p."TYPE", MAX(p."PLANT_DESIGN_CAPACITY_MWE") AS max_mwe FROM WORLD_PLANT_LIST p \
+    where p."PLANT_COUNTRY" = %s \
+    GROUP BY p."TYPE" \
+    ORDER BY max_mwe DESC'
+
+cursor.execute(topustypesql, ("United States of America",))
+topUSPlantTypeRec = cursor.fetchall()
+
+topworldsql = 'select "TYPE", "PLANT_DESIGN_CAPACITY_MWE", "PLANT_NAME",  "PLANT_STATE" from WORLD_PLANT_LIST  \
+    ORDER BY "PLANT_DESIGN_CAPACITY_MWE" DESC NULLS LAST LIMIT 10'
+cursor.execute(topworldsql)
+topWorldRec = cursor.fetchall()
+
+countrysql = 'select "PLANT_COUNTRY", "TYPE", count(*) from WORLD_PLANT_LIST  \
+    where "PLANT_COUNTRY" IS NOT NULL GROUP BY "TYPE", "PLANT_COUNTRY" '
+cursor.execute(countrysql)
+countryRec = cursor.fetchall()
+#print(countryRec)
 
 # Set route
 @app.route('/')
@@ -31,16 +49,46 @@ def index():
     # Return the template
     return render_template('index.html')
 
-@app.route('/top10_api')
-def api():
+@app.route('/top10us_data')
+def top10us_data():
     # Return the template with the teams list passed in
-    return jsonify(records)
+    return render_template('top10us.html', top10Rec=top10USrecords)
 
-@app.route('/10us_new')
-def us10_new():
+@app.route('/top10us_api')
+def top10us_api():
     # Return the template with the teams list passed in
-    return render_template('top10us.html', top10Rec=records)
+    return jsonify(top10USrecords)
 
+@app.route('/topusplanttype_data')
+def topusplanttype_data():
+    # Return the template with the teams list passed in
+    return render_template('topusplanttype.html', top10Rec=topUSPlantTypeRec)
+
+@app.route('/topusplanttype_api')
+def topusplanttype_api():
+    # Return the template with the teams list passed in
+    return jsonify(topUSPlantTypeRec)
+
+@app.route('/topworld_data')
+def topworld_data():
+    # Return the template with the teams list passed in
+    return render_template('topworld.html', top10Rec=topWorldRec)
+
+@app.route('/topworld_api')
+def topworld_api():
+    # Return the template with the teams list passed in
+    return jsonify(topWorldRec)
+
+@app.route('/country_data')
+def country_data():
+    # Return the template with the teams list passed in
+    return render_template('country.html', top10Rec=countryRec)
+
+@app.route('/country_api')
+def country_api():
+    # Return the template with the teams list passed in
+    return jsonify(countryRec)
+  
 @app.route('/consumption')
 def consumption():
     # Return the template
@@ -90,6 +138,7 @@ def csvdata4():
 def csvdata5():
     # Return the template
     return render_template('data/countries.json')
+
 
 #D3.json("/api_data");
 

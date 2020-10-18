@@ -31,25 +31,30 @@ function buildCharts() {
   // Trace Data to draw horizontal barchart
   var names = [];
   var mwe = [];
+  var types = [];
+  var states = [];
 
-  d3.json("/top10us_api").then((dataSet) => {
+  d3.json("/topworld_api").then((dataSet) => {
     console.log(dataSet);
     dataSet.forEach((row) => {
-      names.push(row[0]); 
+      names.push(row[2]); 
       mwe.push(row[1]); 
+      types.push(row[0]);
+      states.push(row[3]);
+     
     })
-   
+
     var barData = [{
       x: names,
       y: mwe,
-      text: names,
-      name: "Top 10 Power Plants (USA)",
+      text: types,
+      name: "Top World Plants",
       type: "bar",
     }];
     
     // Apply the group bar mode to the layout
     var layout = {
-    //  title: "<b>Top 10 US</b>",
+     // title: "<b>Top 10 Plants (World)</b>",
       margin: {
         l: 100,
         r: 100,

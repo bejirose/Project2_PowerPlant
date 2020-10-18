@@ -29,27 +29,32 @@ function buildCharts() {
 
  
   // Trace Data to draw horizontal barchart
-  var names = [];
+  var country = {};
   var mwe = [];
+  var types = [];
+  var states = [];
 
-  d3.json("/top10us_api").then((dataSet) => {
+  d3.json("/country_api").then((dataSet) => {
     console.log(dataSet);
     dataSet.forEach((row) => {
-      names.push(row[0]); 
-      mwe.push(row[1]); 
+      country[row[0]] = row[0]; 
+     // mwe.push(row[1]); 
+      types.push(row[0]);
+      states.push(row[3]);
+     
     })
-   
+
     var barData = [{
-      x: names,
+      x: country,
       y: mwe,
-      text: names,
-      name: "Top 10 Power Plants (USA)",
+      text: types,
+      name: "Top World Plants",
       type: "bar",
     }];
     
     // Apply the group bar mode to the layout
     var layout = {
-    //  title: "<b>Top 10 US</b>",
+     // title: "<b>Top 10 Plants (World)</b>",
       margin: {
         l: 100,
         r: 100,
@@ -66,4 +71,38 @@ function buildCharts() {
 }
 
 
-buildCharts();
+function init() {
+
+  // Fill dropdown with IDs
+  // Get firstOne id and call buildPage with that id
+  
+  d3.json("/country_api").then((dataSet) => {
+
+    var selector = d3.select("#search");
+
+    //dataSet = data;
+
+    //console.log(data);
+
+    dataSet.forEach((row) => {
+    //  names.push(row[2]); 
+      selector
+        .append("option")
+        .text(row[0])
+        .property("value", row[0])
+    })
+
+    firstId = "United States of America";
+
+    buildCharts(firstId);
+
+  })
+}
+
+function optionChanged(selection) {
+
+  buildCharts(selection);
+}
+
+
+init();
