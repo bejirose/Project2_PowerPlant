@@ -1,41 +1,103 @@
-// Store our API endpoint inside queryUrl
-var queryUrl = "https://data.opendatasoft.com/api/records/1.0/search/?dataset=world-power-plants-list%40"+
-                "kapsarc&q=united+states&rows=4857&sort=plant_design_capacity_mwe&facet=plant_country&"+
-                "facet=plant_state&facet=plant_status&facet=plant_type_of_ownership&"+
-                "facet=plant_operating_company&facet=type";
-// Perform a GET request to the query URL
+// Path for data is stored
+var queryUrl = "static/resources/world-power-plants-list.geojson";
+
+// Empty arrays to hold layers are initialized
+var coalData = [];
+var oilData = [];
+var wasteData = [];
+var windData = [];
+var hydroData = [];
+var gasData = [];
+var nuclearData = [];
+var geothermalData = [];
+var solarData = [];
+
+// GET request is made
 d3.json(queryUrl, function(data) {
-
-    console.log(data);
-
-  createFeatures(data);
-});
-
-function createFeatures(data) {
  
-  // Define a function we want to run once for each feature in the features array
-  // Give each feature a popup describing the place and time of the earthquake
-//   function onEachFeature(feature, layer) {
-//       console.log(feature);
-//     layer.bindPopup("<h3>" + feature.properties.place +
-//       "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
-//  }
+  // Function for what to do for each feature
+  function onEachFeature(feature) {
 
-  // Create a GeoJSON layer containing the features array on the earthquakeData object
-  // Run the onEachFeature function once for each piece of data in the array
-//   var plantData = L.geoJSON(data, {
+    // Info for datum is crafted
+    var datum = {"type": "Feature",
+    "properties": {
+        "name": feature.properties.plant_name,
+        "MWE": feature.properties.plant_design_capacity_mwe,
+        "type": feature.properties.type,
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [ feature.geometry.coordinates[0], feature.geometry.coordinates[1]]
+    }}
 
-//     onEachFeature: onEachFeature
-//   });
+    // Datum is pushed into relevant layer
+    switch(feature.properties.type){
+    case "COAL": 
+      coalData.push(datum);
+      break;
+    case "OIL": 
+      oilData.push(datum);
+      break;
+    case "WASTE": 
+      wasteData.push(datum);
+      break;
+    case "WIND": 
+      windData.push(datum);
+      break;
+    case "HYDRO": 
+      hydroData.push(datum);
+      break;
+    case "GAS": 
+      gasData.push(datum);
+      break;
+    case "NUCLEAR": 
+      nuclearData.push(datum);
+      break;
+    case "GEOTHERMAL": 
+      geothermalData.push(datum);
+      break;
+    case "SOLAR_PV": 
+      solarData.push(datum);
+      break;
+    case "SOLAR_THERMAL": 
+      solarData.push(datum);
+      break;
+    default:
+      console.log(feature.properties.type);
+      break;
+    };
+  };
+  
+ 
+  // Layer holding data is defined
+  L.geoJSON(data.features, {
+    onEachFeature: onEachFeature
+  });
 
-  // Sending our earthquakes layer to the createMap function
-  createMap(data);
-}
+  // All geoJSON data is turned into corresponding layers
+  coalLayer = L.geoJSON(coalData);
+  oilLayer = L.geoJSON(oilData);
+  windLayer = L.geoJSON(windData);
+  wasteLayer = L.geoJSON(wasteData);
+  hydroLayer = L.geoJSON(hydroData);
+  gasLayer = L.geoJSON(gasData);
+  nuclearLayer = L.geoJSON(nuclearData);
+  geothermalLayer = L.geoJSON(geothermalData);
+  solarLayer = L.geoJSON(solarData);
 
-function createMap(plantData) {
 
-  // Define streetmap and darkmap layers
+  // Street map is generated
   var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+    tileSize: 512,
+    maxZoom: 18,
+    zoomOffset: -1,
+    id: "mapbox/streets-v11",
+    accessToken: API_KEY
+  });
+
+  // Satellite map is generated
+  var satmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
     tileSize: 512,
     maxZoom: 18,
@@ -44,6 +106,7 @@ function createMap(plantData) {
     accessToken: API_KEY
   });
 
+  // Dark map is generated
   var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
@@ -51,30 +114,62 @@ function createMap(plantData) {
     accessToken: API_KEY
   });
 
-  // Define a baseMaps object to hold our base layers
+  // BaseMaps object holding all base layers is generated
   var baseMaps = {
+    "Satellite Map": satmap,
     "Street Map": streetmap,
     "Dark Map": darkmap
   };
 
-  // Create overlay object to hold our overlay layer
+  // Overlay object holding all overlay layers is generated
   var overlayMaps = {
-//    Plants: plantData
+    "Coal": coalLayer,
+    "Oil": oilLayer,
+    "Gas": gasLayer,
+    "Waste": wasteLayer,
+    "Nuclear": nuclearLayer,
+    "Solar": solarLayer,
+    "Wind": windLayer,
+    "Hydro": hydroLayer,
+    "Geothermal": geothermalLayer,
   };
 
-  // Create our map, giving it the streetmap and earthquakes layers to display on load
+  // Generate myMap, which initializes on the satellite map and is centered on Potkin, Kansas
   var myMap = L.map("map", {
     center: [
       38, -97
     ],
-    zoom: 2,
-    layers: [streetmap]
+    zoom: 3,
+    layers: [satmap, coalLayer, oilLayer, gasLayer, wasteLayer, nuclearLayer, solarLayer, windLayer,
+       hydroLayer, geothermalLayer]
+  });
+  finishMap(myMap, baseMaps, overlayMaps)
+});
+
+// Function for the end step of generating map
+function finishMap(myMap, baseMaps, overlayMaps) {
+  
+  // Function to run through each feature
+  function onEachFeature(layer){
+
+    // One of the passed layers is the layer holding every feature, so if else filters out all undefined
+    if (layer.feature === undefined) {}
+
+    // else creates the popup for every element
+    else {
+    console.log(layer);
+    layer.bindPopup(`<p><strong>Name:</strong></br>${layer.feature.properties.name}</p>
+      <p><strong>Type:</strong></br>${layer.feature.properties.type}</p>
+      <p><strong>MWE:</strong></br>${layer.feature.properties.MWE}</p>
+      <p><strong>Latitude, Longitude:</strong></br>${layer._latlng.lat}, ${layer._latlng.lng}</p>`);
+    }
+  };
+  
+  // Loop through every layer
+  myMap.eachLayer((layer) => {
+    onEachFeature(layer);
   });
 
-  // Create a layer control
-  // Pass in our baseMaps and overlayMaps
-  // Add the layer control to the map
-  L.control.layers(baseMaps, overlayMaps, {
-    collapsed: false
-  }).addTo(myMap);
-}
+  // Layer control is generated and added to map
+  L.control.layers(baseMaps, overlayMaps).addTo(myMap);
+};

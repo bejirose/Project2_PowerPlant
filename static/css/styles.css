@@ -24,7 +24,8 @@ span {
 
 .textWrap {
     float: left;
-    margin: 10px;
+    margin-right: 10px;
+    padding-right: 10px;
     max-width: 40%
 }
 
@@ -45,8 +46,22 @@ a img:hover {
 }
 
 a img{
-    border: 0px solid #8195d7;
+    border-right: 0px solid #8195d7;
+    padding-right: 20px;
+    margin-right: 20px;
 }
+
+img{
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
 
 .color_cyan {
     color: #8195d7;
