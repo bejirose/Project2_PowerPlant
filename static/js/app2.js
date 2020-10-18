@@ -15,7 +15,7 @@
 
 function buildPage(year, countrySelected){
 
-    d3.csv("./data/per-capita-energy-use.csv").then((data) => {
+    d3.csv("/csvdata4").then((data) => {
   
       //console.log(year);
       //console.log(countrySelected);
@@ -89,7 +89,7 @@ function buildPage(year, countrySelected){
 
     
     var data = [{
-      type: "choroplethmapbox", name: "countries", geojson: "./data/countries.json", 
+      type: "choroplethmapbox", name: "countries", geojson: "/csvdata5", 
       locations: code,
       z: kwh,
       zmin: 0, 
@@ -112,7 +112,7 @@ function buildPage(year, countrySelected){
     // Fill dropdown with IDs
     // Get firstOne id and call buildPage with that id
   
-    d3.csv("./data/per-capita-energy-use.csv").then((data) => {
+    d3.csv("/csvdata4").then((data) => {
   
       var selector = d3.select("#selDataset");
       var selector2 = d3.select("#selDataset2");

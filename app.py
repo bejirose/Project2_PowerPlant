@@ -81,6 +81,15 @@ def csvdata3():
     # Return the template
     return render_template('data/primary-energy-consumption-by-source.csv')
 
+@app.route('/csvdata4')
+def csvdata4():
+    # Return the template
+    return render_template('data/per-capita-energy-use.csv')
+
+@app.route('/csvdata5')
+def csvdata5():
+    # Return the template
+    return render_template('data/countries.json')
 
 #D3.json("/api_data");
 
