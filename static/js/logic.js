@@ -1,5 +1,5 @@
 // Path for data is stored
-var queryUrl = "static/resources/world-power-plants-list.geojson";
+var queryUrl = "/map_data";
 
 // Empty arrays to hold layers are initialized
 var coalData = [];
