@@ -58,33 +58,33 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="about.html"><i class="far fa-address-card" style='font-size:20px'></i> Team<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="about"><i class="far fa-address-card" style='font-size:20px'></i> Team<span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="far fa-industry" style='font-size:20px'></i> Production
+                  <i class="far fa-lightbulb" style='font-size:20px'></i> Consumption
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item fas fa-industry" href="production">By Type</a>
-                  <a class="dropdown-item fas fa-industry" href="production2">By Country</a>
+                  <a class="dropdown-item fas fa-lightbulb" href="consumption"> By Type/Region</a>
+                  <a class="dropdown-item fas fa-lightbulb" href="consumption2"> By Year/Country</a>
                 </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="consumption" tabindex="-1" aria-disabled="true"><i class="fas fa-lightbulb" style='font-size:20px'></i>Consumption</a>
+                <a class="nav-link" href="production" tabindex="-1" aria-disabled="true"><i class="fas fa-industry" style='font-size:20px'></i>Production</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="far fa-chart-bar" style='font-size:20px'></i> Analysis
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="top10us_data">Top 10 US Plants</a>
-                  <a class="dropdown-item" href="topusplanttype_data">Top US Plant Types</a>
-                  <a class="dropdown-item" href="topworld_data">Top World Plants</a>
-                  <a class="dropdown-item" href="country_data">Search Country</a>
+                  <a class="dropdown-item far fa-chart-bar" href="top10us_data"> Top 10 US Plants</a>
+                  <a class="dropdown-item far fa-chart-bar" href="topusplanttype_data"> Top US Plant Types</a>
+                  <a class="dropdown-item far fa-chart-bar" href="topworld_data"> Top World Plants</a>
+                  <a class="dropdown-item far fa-chart-bar" href="country_data"> Search Country</a>
                 </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="map.html"><i class="fas fa-globe-americas" style='font-size:20px'></i> Plant Geo</a>
+                <a class="nav-link" href="map"><i class="fas fa-globe-americas" style='font-size:20px'></i> Plant Geo</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="coal" tabindex="-1" aria-disabled="true"><i class="fas fa-smog" style='font-size:20px'></i> Coal</a>
@@ -167,22 +167,13 @@
             </div>
             <div class="container-fluid">
               <div class="row" style="margin: auto">       
-                <div class="col-md-4"> 
-                  <div class="box skywhite container-fluid flex-shrink-0">
-                      <div class="row" style="margin: auto"> 
-                          <div class="col-md-12">
-                              <h4 class="color_cyan">Technology</h4>
-                              <hr>                          
-                          </div>
-                      </div>           
-                  </div>
-                </div>
-                  <div class="col-md-8">
+                  <div class="col-md-12">
                     <div class="box skywhite container-fluid flex-shrink-0">
                       <div class="row" style="margin: auto"> 
                           <div class="col-md-12">
                               <h4 class="color_cyan">Technology Stack powering this Project</h4>
-                              <hr>                          
+                              <hr>    
+                              <img class="img-fluid" width="1000" style="padding-right: 20px" src="{{ url_for('static', filename='Images/architecture.jpg') }}" alt="architecture">                    
                           </div>
                       </div>           
                   </div>
@@ -221,7 +212,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script src="./static/js/app.js"></script>
+  <!-- <script src="./static/js/app.js"></script> -->
   
 </body>
 
