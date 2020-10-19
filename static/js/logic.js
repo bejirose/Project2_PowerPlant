@@ -13,8 +13,8 @@ var geothermalData = [];
 var solarData = [];
 
 // GET request is made
-d3.json(queryUrl).then((data) => {
-  //console.log(data);
+d3.json(queryUrl, function(data) {
+ 
   // Function for what to do for each feature
   function onEachFeature(feature) {
 
@@ -24,6 +24,11 @@ d3.json(queryUrl).then((data) => {
         "name": feature.properties.plant_name,
         "MWE": feature.properties.plant_design_capacity_mwe,
         "type": feature.properties.type,
+        "popupContent": `<p><strong>Name:</strong></br>${feature.properties.plant_name}</p>
+          <p><strong>Type:</strong></br>${feature.properties.type}</p>
+          <p><strong>MWE:</strong></br>${feature.properties.plant_design_capacity_mwe}</p>
+          <p><strong>Latitude, Longitude:
+          </strong></br>${feature.geometry.coordinates[1]}, ${feature.geometry.coordinates[0]}</p>`,
     },
     "geometry": {
         "type": "Point",
@@ -139,9 +144,8 @@ d3.json(queryUrl).then((data) => {
     center: [
       38, -97
     ],
-    zoom: 3,
-    layers: [satmap, coalLayer, oilLayer, gasLayer, wasteLayer, nuclearLayer, solarLayer, windLayer,
-       hydroLayer, geothermalLayer]
+    zoom: 3.2,
+    layers: [satmap, coalLayer]
   });
   finishMap(myMap, baseMaps, overlayMaps)
 });
@@ -150,26 +154,14 @@ d3.json(queryUrl).then((data) => {
 function finishMap(myMap, baseMaps, overlayMaps) {
   
   // Function to run through each feature
-  function onEachFeature(layer){
-
-    // One of the passed layers is the layer holding every feature, so if else filters out all undefined
-    if (layer.feature === undefined) {}
-
-    // else creates the popup for every element
-    else {
-    //console.log(layer);
-    layer.bindPopup(`<p><strong>Name:</strong></br>${layer.feature.properties.name}</p>
-      <p><strong>Type:</strong></br>${layer.feature.properties.type}</p>
-      <p><strong>MWE:</strong></br>${layer.feature.properties.MWE}</p>
-      <p><strong>Latitude, Longitude:</strong></br>${layer._latlng.lat}, ${layer._latlng.lng}</p>`);
-    }
-  };
-  
-  // Loop through every layer
-  myMap.eachLayer((layer) => {
-    onEachFeature(layer);
+  Object.values(overlayMaps).forEach((layer) => {
+    Object.values(layer._layers).forEach((datum) => {
+      datum.bindPopup(datum.feature.properties.popupContent);
+    })
   });
 
   // Layer control is generated and added to map
-  L.control.layers(baseMaps, overlayMaps).addTo(myMap);
+  L.control.layers(baseMaps, overlayMaps,{
+    collapsed: false,
+  }).addTo(myMap);
 };
