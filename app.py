@@ -7,8 +7,8 @@ app = Flask(__name__)
 from sqlalchemy import create_engine
 import psycopg2
 from config import username, password
-print(username)
-print(password)
+# print(username)
+# print(password)
 
 from sqlalchemy import create_engine
 engine = create_engine(f'postgresql://{username}:{password}@localhost:5432/World_power_plant')
@@ -67,11 +67,16 @@ cursor.execute(sql2, ("SOLAR_PV","%(Shutdown)"))
 solar_tables = cursor.fetchall()
 
 
-# Set route
+# Set routes
 @app.route('/')
 def index():
     # Return the template
     return render_template('index.html')
+
+@app.route('/about')
+def about():
+    # Return the template
+    return render_template('about.html')
 
 @app.route('/top10us_data')
 def top10us_data():
@@ -123,10 +128,15 @@ def production():
     # Return the template
     return render_template('production.html')
 
-@app.route('/production2')
+@app.route('/consumption2')
 def production2():
     # Return the template
-    return render_template('production2.html')
+    return render_template('consumption2.html')
+
+@app.route('/datasources')
+def datasources():
+    # Return the template
+    return render_template('datasources.html')
 
 @app.route('/fundamentals')
 def fundamentals():
