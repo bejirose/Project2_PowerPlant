@@ -50,40 +50,41 @@
             <div class="topnav">
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
             </div>
-              <a class="navbar-brand" href="index"><h5 class="color_cyan"><span class='fas fa-home' style='font-size:20px'></span> Energy Matters</h5></a>
-              <a class="navbar-brand" href="index"></a>
+              <a class="navbar-brand" href="/"><h5 class="color_cyan"><span class='fas fa-home' style='font-size:20px'></span> Energy Matters</h5></a>
+              <a class="navbar-brand" href="/"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="about.html"><i class="far fa-address-card" style='font-size:20px'></i> Team<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="about"><i class="far fa-address-card" style='font-size:20px'></i> Team<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="far fa-lightbulb" style='font-size:20px'></i> Consumption
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item fas fa-lightbulb" href="consumption"> By Type/Region</a>
+                  <a class="dropdown-item fas fa-lightbulb" href="consumption2"> By Year/Country</a>
+                </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="production.html" tabindex="-1" aria-disabled="true"><i class="fas fa-industry" style='font-size:20px'></i>Production</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="consumption.html" tabindex="-1" aria-disabled="true"><i class="fas fa-lightbulb" style='font-size:20px'></i>Consumption</a>
+                <a class="nav-link" href="production" tabindex="-1" aria-disabled="true"><i class="fas fa-industry" style='font-size:20px'></i>Production</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="far fa-chart-bar" style='font-size:20px'></i> Analysis
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <!-- <a class="dropdown-item" href="top10us.html">Top 10</a> 
-                  <a class="dropdown-item" href="top10_api">Top 10</a> -->
-                  <a class="dropdown-item" href="10us_new">Top 10</a>
-                  <a class="dropdown-item" href="topworld.html">Plot 2</a>
-                  <a class="dropdown-item" href="plot3.html">Plot 3</a>
-                  <a class="dropdown-item" href="plot4.html">Plot 4</a>
-                  <a class="dropdown-item" href="plot5.html">Plot 5</a>
-                  <a class="dropdown-item" href="plot6.html">Plot 6</a>
-                  <a class="dropdown-item" href="plot7.html">Plot 7</a>
+                  <a class="dropdown-item far fa-chart-bar" href="top10us_data"> Top 10 US Plants</a>
+                  <a class="dropdown-item far fa-chart-bar" href="topusplanttype_data"> Top US Plant Types</a>
+                  <a class="dropdown-item far fa-chart-bar" href="topworld_data"> Top World Plants</a>
+                  <a class="dropdown-item far fa-chart-bar" href="country_data"> Search Country</a>
                 </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="map.html"><i class="fas fa-globe-americas" style='font-size:20px'></i> Plant Geo</a>
+                <a class="nav-link" href="map"><i class="fas fa-globe-americas" style='font-size:20px'></i> Plant Geo</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="coal" tabindex="-1" aria-disabled="true"><i class="fas fa-smog" style='font-size:20px'></i> Coal</a>
@@ -110,7 +111,7 @@
                 <a class="nav-link" href="datasources" tabindex="-1" aria-disabled="true"><i class="fas fa-table" style='font-size:20px'></i> Data Sources</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="fundamentals.html" tabindex="-1" aria-disabled="true"><i class="fas fa-book-open" style='font-size:20px'></i> Fundamentals</a>
+                <a class="nav-link" href="fundamentals" tabindex="-1" aria-disabled="true"><i class="fas fa-book-open" style='font-size:20px'></i> Fundamentals</a>
               </li>
             </ul>
 
@@ -125,7 +126,10 @@
               <div class="col-md-12">
                 <div class="box skywhite">
                   <div class="box skywhite">
-                    <h2 class="color_cyan">Top 20 Wind Plant </h2>
+                    <div>
+                      <img class="img-fluid" width="500" style="padding-right: 20px; display: block;" src="{{ url_for('static', filename='Images/wind.jpg') }}" alt="wind">
+                    </div>
+                    <h2 class="color_cyan">Top 20 Wind Plants </h2>
                     <hr>
                     
                   <div id="second-container">
