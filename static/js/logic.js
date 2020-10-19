@@ -140,18 +140,13 @@ d3.json(queryUrl, function(data) {
   };
 
   // Generate myMap, which initializes on the satellite map and is centered on Potkin, Kansas
-  var myMap = L.map("map", {
+  var myMap = L.map("mapPlace", {
     center: [
       38, -97
     ],
-    zoom: 3.2,
+    zoom: 4,
     layers: [satmap, coalLayer]
   });
-  finishMap(myMap, baseMaps, overlayMaps)
-});
-
-// Function for the end step of generating map
-function finishMap(myMap, baseMaps, overlayMaps) {
   
   // Function to run through each feature
   Object.values(overlayMaps).forEach((layer) => {
@@ -164,4 +159,4 @@ function finishMap(myMap, baseMaps, overlayMaps) {
   L.control.layers(baseMaps, overlayMaps,{
     collapsed: false,
   }).addTo(myMap);
-};
+});
