@@ -4,7 +4,16 @@
 <head>
 
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Energy</title>
+
+  <style>
+    #mapPlace {
+      width: 1800px;
+      height: 700px;
+    }
+  </style>
 
   <!-- Bring in our bootstrap stylesheet 
   <link rel="stylesheet" href="./static/css/bootstrap.min.css">
@@ -130,53 +139,12 @@
               <div class="col-md-12">
                 <div class="box skywhite">
                   <div class="box skywhite">
-                    <h2 class="color_cyan">Energy Industry & Power Plants (Engines of Energy)</h2>
-                    <hr>
-                    <img class="float-left img-fluid textWrap" style="padding-right: 20px" src="{{ url_for('static', filename='Images/home_1.jpg') }}" alt="energy-1">
-                    <h5 class="color_cyan">Introduction</h5>
-                   
-                    <div id="map"></div>
+                    <h2 class="color_cyan">Power plants in the United States</h2>
+        
+                    <div id="mapPlace"></div>
 
                 </div>
               </div>  
-            </div>
-            <div class="container-fluid">
-              <div class="row" style="margin: auto">       
-                <div class="col-md-4"> 
-                  <div class="box skywhite container-fluid flex-shrink-0">
-                      <div class="row" style="margin: auto"> 
-                          <div class="col-md-12">
-                              <h4 class="color_cyan">Technology</h4>
-                              <hr>                          
-                          </div>
-                      </div>           
-                  </div>
-                </div>
-                  <div class="col-md-8">
-                    <div class="box skywhite container-fluid flex-shrink-0">
-                      <div class="row" style="margin: auto"> 
-                          <div class="col-md-12">
-                              <h4 class="color_cyan">Technology Stack powering this Project</h4>
-                              <hr>                          
-                          </div>
-                      </div>           
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="container-fluid">
-            <div class="row" style="margin: auto">  
-              <div class="col-md-12">
-                <div class="box skywhite container-fluid flex-shrink-0">
-                  <div class="row" style="margin: auto"> 
-                      <div class="col-md-12">
-                          <h4 class="color_cyan"></h4>
-                          <hr>                          
-                      </div>
-                  </div>           
-              </div>
-              </div>
-            </div>
             </div>
         </div>
         </div>
@@ -200,8 +168,8 @@
   <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
   <!-- D3 JavaScript -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
-  <script src="./static/js/logic.js"></script>
   <script src="./static/js/config.js"></script>
+  <script src="./static/js/logic.js"></script>
 
 </body>
 

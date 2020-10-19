@@ -7,8 +7,6 @@ app = Flask(__name__)
 from sqlalchemy import create_engine
 import psycopg2
 from config import username, password
-# print(username)
-# print(password)
 
 from sqlalchemy import create_engine
 engine = create_engine(f'postgresql://{username}:{password}@localhost:5432/World_power_plant')
