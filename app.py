@@ -163,6 +163,16 @@ def csvdata5():
     # Return the template
     return render_template('data/countries.json')
 
+@app.route('/map_data')
+def map_data():
+    # Return the template
+    return render_template('data/world-power-plants-list.geojson')
+
+@app.route('/map')
+def map():
+    # Return the template
+    return render_template('map.html')
+
 @app.route('/coal')
 def coal():
     # Return the template with the teams list passed in
