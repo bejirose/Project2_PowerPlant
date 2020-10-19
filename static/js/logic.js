@@ -13,8 +13,8 @@ var geothermalData = [];
 var solarData = [];
 
 // GET request is made
-d3.json(queryUrl, function(data) {
- 
+d3.json(queryUrl).then((data) => {
+  //console.log(data);
   // Function for what to do for each feature
   function onEachFeature(feature) {
 
@@ -157,7 +157,7 @@ function finishMap(myMap, baseMaps, overlayMaps) {
 
     // else creates the popup for every element
     else {
-    console.log(layer);
+    //console.log(layer);
     layer.bindPopup(`<p><strong>Name:</strong></br>${layer.feature.properties.name}</p>
       <p><strong>Type:</strong></br>${layer.feature.properties.type}</p>
       <p><strong>MWE:</strong></br>${layer.feature.properties.MWE}</p>
