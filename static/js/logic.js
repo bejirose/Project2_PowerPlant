@@ -145,7 +145,7 @@ d3.json(queryUrl, function(data) {
     center: [
       38, -97
     ],
-    zoom: 4,
+    zoom: 5,
     layers: [satmap, coalLayer]
   });
   
