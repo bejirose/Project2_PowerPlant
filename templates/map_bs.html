@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-us" class="h-100">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Energy</title>
+
+  <style>
+    #mapPlace {
+      width: 1800px;
+      height: 700px;
+      /* width: 100%; */
+    }
+  </style>
+
+  <!-- Bring in our bootstrap stylesheet 
+  <link rel="stylesheet" href="./static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./static/css/styles.css">
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  --> 
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+  
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+  <!-- CHANGED Custom styles for this template
+  <link rel="stylesheet" href="./static/css/sticky-footer-navbar.css"> -->
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sticky-footer-navbar.css') }}" />
+
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="topnav">
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            </div>
+              <a class="navbar-brand" href="/"><h5 class="color_cyan"><span class='fas fa-home' style='font-size:20px'></span> Energy Matters</h5></a>
+              <a class="navbar-brand" href="/"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="about"><i class="far fa-address-card" style='font-size:20px'></i> Team<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="far fa-lightbulb" style='font-size:20px'></i> Consumption
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item fas fa-lightbulb" href="consumption"> By Type/Region</a>
+                  <a class="dropdown-item fas fa-lightbulb" href="consumption2"> By Year/Country</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="production" tabindex="-1" aria-disabled="true"><i class="fas fa-industry" style='font-size:20px'></i>Production</a>
+              </li>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="consumption" tabindex="-1" aria-disabled="true"><i class="fas fa-lightbulb" style='font-size:20px'></i>Consumption</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="far fa-chart-bar" style='font-size:20px'></i> Analysis
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item far fa-chart-bar" href="top10us_data"> Top 10 US Plants</a>
+                  <a class="dropdown-item far fa-chart-bar" href="topusplanttype_data"> Top US Plant Types</a>
+                  <a class="dropdown-item far fa-chart-bar" href="topworld_data"> Top World Plants</a>
+                  <a class="dropdown-item far fa-chart-bar" href="country_data"> Search Country</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="map"><i class="fas fa-globe-americas" style='font-size:20px'></i> Plant Geo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="coal" tabindex="-1" aria-disabled="true"><i class="fas fa-smog" style='font-size:20px'></i> Coal</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="gas" tabindex="-1" aria-disabled="true"><i class="fas fa-fire-alt" style='font-size:20px'></i> Gas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="oil" tabindex="-1" aria-disabled="true"><i class="fas fa-oil-can" style='font-size:20px'></i> Oil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="hydro" tabindex="-1" aria-disabled="true"><i class="fas fa-shower" style='font-size:20px'></i> Hydro</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="nuclear" tabindex="-1" aria-disabled="true"><i class="fas fa-atom" style='font-size:20px'></i> Nuclear</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="wind" tabindex="-1" aria-disabled="true"><i class="fas fa-wind" style='font-size:20px'></i> Wind</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="solar" tabindex="-1" aria-disabled="true"><i class="fas fa-solar-panel" style='font-size:20px'></i> Solar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="datasources" tabindex="-1" aria-disabled="true"><i class="fas fa-table" style='font-size:20px'></i> Data Sources</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="fundamentals" tabindex="-1" aria-disabled="true"><i class="fas fa-book-open" style='font-size:20px'></i> Fundamentals</a>
+              </li>
+            </ul>
+
+          </div>
+        </nav>
+    </header>
+    
+
+      <!-- Begin page content -->
+    <main role="main" class="flex-shrink-0">
+      <div id="mapPlace"></div>
+        <div class="container-fluid">
+            <div class="row" style="margin: auto"> 
+              <div class="col-md-12">
+                <div class="box skywhite">
+                  <div class="box skywhite">
+                    <h2 class="color_cyan">Power plants in the United States</h2>
+        
+                    <div class="container" id="mapPlace"></div>
+
+                </div>
+              </div>  
+            </div>
+        </div>
+        </div>
+
+    </main>
+
+    <div class='row'>
+        <div class='col-lg-12 col-lg-offset-2'><hr></div>
+    </div>
+    <footer class="footer mt-auto text-center py-3">
+        <div class="container">          
+          <span class="text" style="color: #adafae">&#169; Copyright Univ of Arizona Data Analytics Bootcamp 2020</span>
+        </div>
+    </footer>
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+  <!-- D3 JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
+  <script src="./static/js/config.js"></script>
+  <script src="./static/js/logic.js"></script>
+
+</body>
+
+</html>
