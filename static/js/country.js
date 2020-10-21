@@ -25,46 +25,44 @@ function dispIDemography(id){
   return thisData[0].wfreq;
 }
 
-function buildCharts() {
+function buildCharts(selectItem) {
 
- 
+  
   // Trace Data to draw horizontal barchart
   var country = {};
   var mwe = [];
   var types = [];
-  var states = [];
+  var count = [];
 
   d3.json("/country_api").then((dataSet) => {
     console.log(dataSet);
     dataSet.forEach((row) => {
-      country[row[0]] = row[0]; 
-     // mwe.push(row[1]); 
-      types.push(row[0]);
-      states.push(row[3]);
-     
+      if (row[0] == selectItem) {
+        //country[row[0]] = row[0]; 
+        // mwe.push(row[1]); 
+        types.push(row[1]);
+        count.push(row[2]);
+      }
     })
 
-    var barData = [{
-      x: country,
-      y: mwe,
-      text: types,
-      name: "Top World Plants",
-      type: "bar",
+    // Create the data array for the plot
+    var data = [{
+      values: count,
+      labels: types,
+      type: "pie",
     }];
-    
-    // Apply the group bar mode to the layout
+
+    // Define the plot layout
     var layout = {
-     // title: "<b>Top 10 Plants (World)</b>",
-      margin: {
-        l: 100,
-        r: 100,
-        t: 100,
-        b: 100
-      }
+      title: `Number of Plants by Type for <b>${selectItem}</b>`,
+      height: 450,
+      width: 700,
+      paper_bgcolor: "#2b3752",
+      font: {color: '#9f9f9f'}
     };
-    
-    // Render the plot to the div tag with id "plot"
-    Plotly.newPlot("bar", barData, layout);
+
+    // Plot the chart to a div tag with id "pie"
+    Plotly.newPlot("pie", data, layout);
   
   })
  
@@ -84,12 +82,25 @@ function init() {
 
     //console.log(data);
 
+    selector
+      .append("option")
+      .text("United States of America")
+      .property("value", "United States of America")
+
+      
+
     dataSet.forEach((row) => {
-    //  names.push(row[2]); 
-      selector
-        .append("option")
-        .text(row[0])
-        .property("value", row[0])
+      var isExist = !!$('#search option').filter(function() {
+        return $(this).attr('value').toLowerCase() === row[0].toLowerCase();
+      }).length;
+
+      if (!isExist) {
+    
+        selector
+          .append("option")
+          .text(row[0])
+          .property("value", row[0])
+      }
     })
 
     firstId = "United States of America";

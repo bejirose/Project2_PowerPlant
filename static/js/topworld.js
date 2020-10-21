@@ -55,6 +55,24 @@ function buildCharts() {
     // Apply the group bar mode to the layout
     var layout = {
      // title: "<b>Top 10 Plants (World)</b>",
+      xaxis: {
+        title: {
+          text: 'Plant Names',
+          font: {
+            //family: 'Courier New, monospace',
+            size: 18
+          }
+        },
+        automargin: true
+      },
+      yaxis: {
+        title: {
+          text: 'Plant Capacity (MWE)',
+          font: {
+            size: 18,
+          }
+        }
+      },
       margin: {
         l: 100,
         r: 100,
