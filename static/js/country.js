@@ -35,7 +35,6 @@ function buildCharts(selectItem) {
   var count = [];
 
   d3.json("/country_api").then((dataSet) => {
-    console.log(dataSet);
     dataSet.forEach((row) => {
       if (row[0] == selectItem) {
         //country[row[0]] = row[0]; 
@@ -76,7 +75,9 @@ function init() {
   
   d3.json("/country_api").then((dataSet) => {
 
-    var selector = d3.select("#search");
+   dataSet.sort();
+   
+   var selector = d3.select("#search");
 
     //dataSet = data;
 
@@ -91,7 +92,7 @@ function init() {
 
     dataSet.forEach((row) => {
       var isExist = !!$('#search option').filter(function() {
-        return $(this).attr('value').toLowerCase() === row[0].toLowerCase();
+        return $(this).attr('value').toLowerCase() == row[0].toLowerCase();
       }).length;
 
       if (!isExist) {
