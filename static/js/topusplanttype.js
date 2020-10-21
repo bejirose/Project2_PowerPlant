@@ -1,7 +1,7 @@
 function buildCharts() {
 
    // Trace Data to draw horizontal barchart
-  var  = [];
+  var names = [];
   var mwe = [];
   var types = [];
   var states = [];
@@ -21,8 +21,8 @@ function buildCharts() {
     var barData = [{
       x: types,
       y: mwe,
-      text: [names, states],
-      name: "Top Power Plants By Type (USA)",
+      text: names,
+      name: "Top Power Plants By Type",
       type: "bar",
       marker: {
         color: barColor
@@ -32,6 +32,23 @@ function buildCharts() {
     // Apply the group bar mode to the layout
     var layout = {
      // title: "<b>Top 10 US</b>",
+      xaxis: {
+        title: {
+          text: 'Plant Types',
+          font: {
+            //family: 'Courier New, monospace',
+            size: 18
+           }
+        },
+      },
+      yaxis: {
+        title: {
+          text: 'Plant Capacity (MWE)',
+          font: {
+            size: 18,
+          }
+        }
+      },
       margin: {
         l: 100,
         r: 100,
