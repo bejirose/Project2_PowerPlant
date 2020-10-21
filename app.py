@@ -176,6 +176,11 @@ def map_data():
     # Return the template
     return render_template('data/world-power-plants-list.geojson')
 
+@app.route('/map_raw')
+def map_raw():
+    # Return the template
+    return render_template('map_raw.html')
+
 @app.route('/map')
 def map():
     # Return the template
